@@ -1,4 +1,12 @@
 import "./App.css";
+import { getCurrentWeather } from "./services/api";
+
+interface locationType {
+  id: number;
+  name: string;
+  lat: string;
+  lon: string;
+}
 
 const cities = [
   { id: 1, name: "Tehran", lat: "35.7219", lon: "51.3347" },
@@ -8,8 +16,9 @@ const cities = [
 
 function App() {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const {value} = e.target;
-    console.log(JSON.parse(value))
+    const { value } = e.target;
+    const location:locationType = JSON.parse(value);
+    getCurrentWeather({ lat: location.lat, lon: location.lon });
   };
 
   return (
