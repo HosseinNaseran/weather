@@ -7,10 +7,10 @@ const client = axios.create({
 
 const APIKey = "c6f036809400e39a383c8654b49b6448"
 
- export function getCurrentWeather({lat , lon } : {lat : string , lon : string}) {
+ export async function getCurrentWeather({lat , lon } : {lat : string , lon : string}) {
      
-    await client(`/weather?lat=${lat}&lon=${lon}&appid=${APIKey}`)
-
+   const {data} = await client(`/weather?lat=${lat}&lon=${lon}&appid=${APIKey}`)
+    return data
 
 
     
