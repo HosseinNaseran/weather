@@ -17,22 +17,25 @@ const cities = [
 ];
 
 function App() {
-
-  const [weatherData , setWeatherData] = useState<WeatherData>();
-
+  const [weatherData, setWeatherData] = useState<WeatherData>();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
-    const location:locationType = JSON.parse(value);
-    getCurrentWeather({ lat: location.lat, lon: location.lon }).then(result=>{
-      setWeatherData(result)
-      
-    });
+    const location: locationType = JSON.parse(value);
+    getCurrentWeather({ lat: location.lat, lon: location.lon }).then(
+      (result) => {
+        setWeatherData(result);
+      },
+    );
   };
 
   return (
     <>
       <h1>weather app</h1>
+
+      <h2>presure : {weatherData?.main.pressure}</h2>
+      <h2> temp :{weatherData?.main.temp}</h2>
+      <h2>wind speed :{weatherData?.wind.speed}</h2>
 
       <select onChange={handleChange}>
         {cities.map((item) => (
