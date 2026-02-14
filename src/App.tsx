@@ -37,7 +37,7 @@ function App() {
       <select onChange={handleChange}>
         {cities.map((item) => (
           <option key={item.id} value={JSON.stringify(item)}>
-            {item.name}
+            {isPersian ? item.Iname : item.Ename}
           </option>
         ))}
       </select>

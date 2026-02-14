@@ -4,3 +4,22 @@
   padding: 2rem;
   text-align: center;
 }
+ button {
+  border-radius: 25px;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 16px;
+ }
+ button:hover {
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.1);
+ }
+ button:active {
+  
+  outline: 1px solid white;
+ }
+ select {
+  padding: 0.5rem;
+  border-radius: 5px;
+  border: none;
+ }
