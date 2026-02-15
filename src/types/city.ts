@@ -3,4 +3,5 @@ export interface LocationType {
   name: string;
   lat: string;
   lon: string;
+  
 }

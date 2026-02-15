@@ -20,19 +20,41 @@ function App() {
     );
   };
   const [isPersian, setIsPersian] = useState(false);
-
+  const temp = weatherData?.main.temp ? weatherData.main.temp - 273.15 : undefined;
   return (
-    <>
-      {isPersian ?
+    <div className="weather-items-container">
+     
+     
+     {isPersian ? <h1>هواشناسی</h1> : <h1>weather app</h1>}
+    
+    
+      <div className="weather-items">
+
+      <div className="weather-item">
+
+        {isPersian ? <div><h2>فشار هوا   :</h2><span> {weatherData?.main.pressure}</span> </div>:
+        <div> <h2>presure :</h2> <span>{weatherData?.main.pressure}</span> </div>}
+      </div>
+      <div className="weather-item">
+
+        {isPersian ? <div><h2>دمای هوا : </h2> <span>{temp?.toFixed()}°C</span></div>
+        : <div><h2> temp : </h2><span>{temp?.toFixed()}°C</span></div>}
+      </div>
+      <div className="weather-item">
+
+        {isPersian ? <div><h2>سرعت باد :</h2> <span>{weatherData?.wind.speed}</span></div>
+        : <div><h2>wind speed :</h2><span>{weatherData?.wind.speed}</span></div>}
+      </div>
+
+      </div>
+
+      <div className="weather-buttons">
+
+ {isPersian ?
         <button onClick={() => setIsPersian(false)}>English</button>
         :
         <button onClick={() => setIsPersian(true)}>فارسی</button>
       }
-     {isPersian ? <h1>هواشناسی</h1> : <h1>weather app</h1>}
-
-      {isPersian ?   <h2>فشار هوا : {weatherData?.main.pressure}</h2>:<h2>presure : {weatherData?.main.pressure}</h2>}
-      {isPersian ?  <h2>دمای هوا :{weatherData?.main.temp}</h2>:<h2> temp :{weatherData?.main.temp}</h2> }
-      {isPersian ? <h2>سرعت باد :{weatherData?.wind.speed}</h2> : <h2>wind speed :{weatherData?.wind.speed}</h2>}
 
       <select onChange={handleChange}>
         {cities.map((item) => (
@@ -41,7 +63,8 @@ function App() {
           </option>
         ))}
       </select>
-    </>
+    </div>
+      </div>
   );
 }
 
