@@ -47,23 +47,7 @@
     
     
   }
-  @keyframes animation {
-    0% {
-      transform: translate(0, 0);
-    }
-    25% {
-      transform: translate(0, 460px);
-    }
-    50% {
-      transform: translate(175px, 460px);
-    }
-    75% {
-      transform: translate(175px, 0px);
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
+ 
   .shape {
     background: #42a5f5;
     border-radius: 100%;
@@ -76,6 +60,23 @@
     
     
  }
+  @keyframes animation {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(0, 300px);
+    }
+    50% {
+      transform: translate(390px, 300px);
+    }
+    75% {
+      transform: translate(390px, 0px);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
 
  .weather-items {
    display: grid;
@@ -121,4 +122,21 @@
    .weather-items {
      grid-template-columns: 1fr;
    }
+    @keyframes animation {
+    0% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(0, 460px);
+    }
+    50% {
+      transform: translate(175px, 460px);
+    }
+    75% {
+      transform: translate(175px, 0px);
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
  }

@@ -20,7 +20,8 @@ function App() {
     );
   };
   const [isPersian, setIsPersian] = useState(false);
-  const temp = weatherData?.main.temp ? weatherData.main.temp - 273.15 : undefined;
+  
+  const temp = weatherData?.main.temp ? weatherData.main.temp - 273.15 : undefined; //تبدیل کلوین به سانتیگراد
   return (
     <div className="container">
 
