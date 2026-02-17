@@ -5,7 +5,7 @@
   "homepage": "https://hosseinnaseran.github.io/weather",
   "type": "module",
   "scripts": {
-    "predeploy": "pnpm run build",
+    "predeploy": "npm run build",
     "deploy" : "gh-pages -d build",
     "dev": "vite --host",
     "build": "tsc -b && vite build",
