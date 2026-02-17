@@ -3,7 +3,6 @@
    margin: 0 auto;
    padding: 2rem;
    text-align: center;
-    
  }
 
  button {
@@ -11,15 +10,12 @@
    border: none;
    padding: 0.5rem 1rem;
    font-size: 16px;
- }
-
- button:hover {
    cursor: pointer;
    background-color: rgba(255, 255, 255, 0.1);
  }
 
+ 
  button:active {
-
    outline: 1px solid white;
  }
 
@@ -27,64 +23,67 @@
    padding: 0.5rem;
    border-radius: 5px;
    border: none;
-  }
-  .container{
-    
-    position: relative;
-    z-index: 1;
-    
-  }
-  
-  .weather-items-container {
-    border-radius: 25px;
-    padding: 1rem 5rem;
-    backdrop-filter: blur(50px);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
-    
-    
-    
-    
-    
-  }
- 
-  .shape {
-    background: #42a5f5;
-    border-radius: 100%;
-    width: 200px;
-    height: 200px;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    animation: animation 20s ease-in-out infinite;
-    
-    
+   cursor: pointer;
+   background-color: rgba(255, 255, 255, 0.1);
+   font-weight: 600;
+   
  }
-  @keyframes animation {
-    0% {
-      transform: translate(0, 0);
-    }
-    25% {
-      transform: translate(0, 300px);
-    }
-    50% {
-      transform: translate(390px, 300px);
-    }
-    75% {
-      transform: translate(390px, 0px);
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
+ option{
+ background-color: rgb(0, 0, 0);
+   
+ 
+ }
+
+ .container {
+   position: relative;
+   z-index: 1;
+ }
+
+ .weather-items-container {
+   border-radius: 25px;
+   padding: 1rem 5rem;
+   backdrop-filter: blur(50px);
+   border: 2px solid rgba(255, 255, 255, 0.1);
+   color: #fff;
+ }
+
+ .shape {
+   background: #42a5f5;
+   border-radius: 100%;
+   width: 200px;
+   height: 200px;
+   position: absolute;
+   top: 0px;
+   left: 0px;
+   animation: animation 20s ease-in-out infinite;
+ }
+
+ @keyframes animation {
+   0% {
+     transform: translate(0, 0);
+   }
+
+   25% {
+     transform: translate(0, 300px);
+   }
+
+   50% {
+     transform: translate(390px, 300px);
+   }
+
+   75% {
+     transform: translate(390px, 0px);
+   }
+
+   100% {
+     transform: translate(0, 0);
+   }
+ }
 
  .weather-items {
    display: grid;
    grid-template-columns: repeat(2, 1fr);
-
    margin-bottom: 2rem;
-   
-  
  }
 
  .weather-item {
@@ -98,9 +97,6 @@
    direction: rtl;
    text-align: right;
    transition: 0.5s;
-   
-
-
  }
 
  .weather-item * {
@@ -108,13 +104,13 @@
  }
 
  .weather-items :hover {
-   box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+   box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.5);
  }
 
  .weather-buttons {
    display: flex;
    justify-content: center;
-   gap: 1rem;
+   gap: 3rem;
  }
 
 
@@ -122,21 +118,26 @@
    .weather-items {
      grid-template-columns: 1fr;
    }
-    @keyframes animation {
-    0% {
-      transform: translate(0, 0);
-    }
-    25% {
-      transform: translate(0, 460px);
-    }
-    50% {
-      transform: translate(175px, 460px);
-    }
-    75% {
-      transform: translate(175px, 0px);
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
+
+   @keyframes animation {
+     0% {
+       transform: translate(0, 0);
+     }
+
+     25% {
+       transform: translate(0, 460px);
+     }
+
+     50% {
+       transform: translate(175px, 460px);
+     }
+
+     75% {
+       transform: translate(175px, 0px);
+     }
+
+     100% {
+       transform: translate(0, 0);
+     }
+   }
  }

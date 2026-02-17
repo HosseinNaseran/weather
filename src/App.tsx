@@ -20,7 +20,7 @@ function App() {
     );
   };
   const [isPersian, setIsPersian] = useState(false);
-  
+
   const temp = weatherData?.main.temp ? weatherData.main.temp - 273.15 : undefined; //تبدیل کلوین به سانتیگراد
   return (
     <div className="container">
@@ -35,18 +35,21 @@ function App() {
 
           <div className="weather-item">
 
-            {isPersian ? <div><h2>فشار هوا   :</h2><span> {weatherData?.main.pressure}</span> </div> :
+            {isPersian ? <div><h2>فشار هوا   :</h2><span> {weatherData?.main.pressure}</span> </div>
+              :
               <div> <h2>presure :</h2> <span>{weatherData?.main.pressure}</span> </div>}
           </div>
           <div className="weather-item">
 
             {isPersian ? <div><h2>دمای هوا : </h2> <span>{temp?.toFixed()}°C</span></div>
-              : <div><h2> temp : </h2><span>{temp?.toFixed()}°C</span></div>}
+              :
+              <div><h2> temp : </h2><span>{temp?.toFixed()}°C</span></div>}
           </div>
           <div className="weather-item">
 
             {isPersian ? <div><h2>سرعت باد :</h2> <span>{weatherData?.wind.speed}</span></div>
-              : <div><h2>wind speed :</h2><span>{weatherData?.wind.speed}</span></div>}
+              :
+              <div><h2>wind speed :</h2><span>{weatherData?.wind.speed}</span></div>}
           </div>
 
         </div>
