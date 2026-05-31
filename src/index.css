@@ -12,15 +12,11 @@
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
     background-color: #080710;
- }
-
- body {
-   margin: 0;
-   display: flex;
-   place-items: center;
-   min-width: 320px;
-   min-height: 100vh;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  
  }
 
  h1 {

@@ -4,10 +4,13 @@ import { getCurrentWeather } from "./services/api";
 import type { WeatherData } from "./types/server";
 import type { LocationType } from "./types/city";
 import { cities } from "./data/cities";
+import Select from "react-select";
 
 function App() {
   const [weatherData, setWeatherData] = useState<WeatherData>();
+  const [isPersian, setIsPersian] = useState(false);
 
+  
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
     const location: LocationType = JSON.parse(value);
@@ -15,60 +18,97 @@ function App() {
       (result) => {
         setWeatherData(result);
         console.log(result);
-
-      },
+      }
     );
   };
-  const [isPersian, setIsPersian] = useState(false);
 
-  const temp = weatherData?.main.temp ? weatherData.main.temp - 273.15 : undefined; //تبدیل کلوین به سانتیگراد
+  // هندلر جدید برای سازگاری با react-select
+  const handleSelectChange = (selectedOption: any) => {
+    if (selectedOption) {
+      // شبیه‌سازی رویداد select معمولی
+      const fakeEvent = {
+        target: { value: selectedOption.value },
+      } as React.ChangeEvent<HTMLSelectElement>;
+      handleChange(fakeEvent);
+    } else {
+      // اگر کاربر گزینه را پاک کرد
+      setWeatherData(undefined);
+    }
+  };
+
+  // تبدیل آرایه cities به فرمت مورد نیاز react-select
+  const cityOptions = cities.map((item) => ({
+    value: JSON.stringify(item), // همان مقدار قبلی که در value سلکت بود
+    label: isPersian ? item.Iname : item.Ename,
+  }));
+
+  const temp = weatherData?.main.temp
+    ? weatherData.main.temp - 273.15
+    : undefined;
+
   return (
     <div className="container">
-
       <span className="shape"></span>
       <div className="weather-items-container">
-
         {isPersian ? <h1>هواشناسی</h1> : <h1>weather app</h1>}
 
-
         <div className="weather-items">
-
           <div className="weather-item">
-
-            {isPersian ? <div><h2>فشار هوا   :</h2><span> {weatherData?.main.pressure}</span> </div>
-              :
-              <div> <h2>presure :</h2> <span>{weatherData?.main.pressure}</span> </div>}
+            {isPersian ? (
+              <div>
+                <h2>فشار هوا   :</h2>
+                <span> {weatherData?.main.pressure}</span>
+              </div>
+            ) : (
+              <div>
+                <h2>presure :</h2> <span>{weatherData?.main.pressure}</span>
+              </div>
+            )}
           </div>
           <div className="weather-item">
-
-            {isPersian ? <div><h2>دمای هوا : </h2> <span>{temp?.toFixed()}°C</span></div>
-              :
-              <div><h2> temp : </h2><span>{temp?.toFixed()}°C</span></div>}
+            {isPersian ? (
+              <div>
+                <h2>دمای هوا : </h2> <span>{temp?.toFixed()}°C</span>
+              </div>
+            ) : (
+              <div>
+                <h2> temp : </h2>
+                <span>{temp?.toFixed()}°C</span>
+              </div>
+            )}
           </div>
           <div className="weather-item">
-
-            {isPersian ? <div><h2>سرعت باد :</h2> <span>{weatherData?.wind.speed}</span></div>
-              :
-              <div><h2>wind speed :</h2><span>{weatherData?.wind.speed}</span></div>}
+            {isPersian ? (
+              <div>
+                <h2>سرعت باد :</h2> <span>{weatherData?.wind.speed}</span>
+              </div>
+            ) : (
+              <div>
+                <h2>wind speed :</h2>
+                <span>{weatherData?.wind.speed}</span>
+              </div>
+            )}
           </div>
-
         </div>
 
         <div className="weather-buttons">
-
-          {isPersian ?
+          {isPersian ? (
             <button onClick={() => setIsPersian(false)}>English</button>
-            :
+          ) : (
             <button onClick={() => setIsPersian(true)}>فارسی</button>
-          }
+          )}
 
-          <select onChange={handleChange}>
-            {cities.map((item) => (
-              <option key={item.id} value={JSON.stringify(item)}>
-                {isPersian ? item.Iname : item.Ename}
-              </option>
-            ))}
-          </select>
+          {/* جایگزینی select معمولی با searchable select */}
+        <Select
+  options={cityOptions}
+  onChange={handleSelectChange}
+  isSearchable
+  isClearable
+  placeholder={isPersian ? "جستجوی شهر..." : "Search city..."}
+  noOptionsMessage={() => isPersian ? "شهری یافت نشد" : "No city found"}
+  classNamePrefix="custom-select"   // کلید اصلی
+  className="city-select"           // کلاس اضافی برای کانتینر بیرونی
+/>
         </div>
       </div>
     </div>

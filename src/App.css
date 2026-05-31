@@ -1,11 +1,4 @@
- #root {
-   max-width: 1280px;
-   margin: 0 auto;
-   padding: 2rem;
-   text-align: center;
- }
-
- button {
+button {
    border-radius: 5px;
    border: none;
    padding: 0.5rem 1rem;
@@ -19,24 +12,15 @@
    outline: 1px solid white;
  }
 
- select {
-   padding: 0.5rem;
-   border-radius: 5px;
-   border: none;
-   cursor: pointer;
-   background-color: rgba(255, 255, 255, 0.1);
-   font-weight: 600;
-   
- }
- option{
- background-color: rgb(0, 0, 0);
-   
  
- }
 
  .container {
    position: relative;
    z-index: 1;
+   text-align: center;
+   max-width: fit-content;
+  
+   
  }
 
  .weather-items-container {
@@ -45,6 +29,7 @@
    backdrop-filter: blur(50px);
    border: 2px solid rgba(255, 255, 255, 0.1);
    color: #fff;
+  
  }
 
  .shape {
@@ -113,11 +98,108 @@
    gap: 3rem;
  }
 
+ 
 
- @media (max-width: 500px) {
+/* کانتینر بیرونی - عرض مناسب */
+.city-select {
+  min-width: 200px;
+}
+
+/* قسمت اصلی سلکت */
+.custom-select__control {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border: none !important;
+  border-radius: 5px !important;
+  min-height: auto !important;
+  padding: 0.5rem !important; 
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 16px;
+  
+}
+
+/* وقتی سلکت فوکوس است */
+.custom-select__control--is-focused {
+  outline: 1px solid white;
+  box-shadow: none;
+}
+
+/* متن انتخاب شده */
+.custom-select__single-value {
+  color: white !important;
+  font-weight: 600;
+}
+
+/* placeholder */
+.custom-select__placeholder {
+  color: rgba(255, 255, 255, 0.7) !important;
+  font-weight: normal;
+}
+
+/* فیلد ورودی جستجو */
+.custom-select__input-container {
+  color: white;
+}
+
+.custom-select__input-container input {
+  color: white !important;
+}
+
+/* فلش و دکمه پاک کردن */
+.custom-select__dropdown-indicator,
+.custom-select__clear-indicator {
+  color: white !important;
+  padding: 0 4px;
+}
+
+.custom-select__dropdown-indicator:hover,
+.custom-select__clear-indicator:hover {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* منوی باز شده (لیست گزینه‌ها) */
+.custom-select__menu {
+  background-color: black !important;  /* همرنگ option قبلی */
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+/* هر گزینه */
+.custom-select__option {
+  background-color: black !important;
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* گزینه وقتی موس می‌رود */
+.custom-select__option--is-focused {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* گزینه انتخاب شده */
+.custom-select__option--is-selected {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  font-weight: 600;
+}
+
+/* پیام "گزینه‌ای یافت نشد" */
+.custom-select__menu-notice--no-options {
+  color: white;
+  background-color: black;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+
+ @media (max-width: 700px) {
    .weather-items {
      grid-template-columns: 1fr;
    }
+  
+  
 
    @keyframes animation {
      0% {
@@ -141,3 +223,25 @@
      }
    }
  }
+
+ @media (max-width:450px) {
+  .shape{
+    display: none;
+  }
+  .weather-items-container{
+    border: none;
+    backdrop-filter: none;
+    
+    
+  }
+  html{
+    background: linear-gradient(#0003a158,#01074462 ,  #000);
+  }
+
+  
+ .weather-item{
+  margin: 7px;
+
+
+ } 
+}
