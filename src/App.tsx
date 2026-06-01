@@ -22,10 +22,9 @@ function App() {
     );
   };
 
-  // هندلر جدید برای سازگاری با react-select
   const handleSelectChange = (selectedOption: any) => {
     if (selectedOption) {
-      // شبیه‌سازی رویداد select معمولی
+      
       const fakeEvent = {
         target: { value: selectedOption.value },
       } as React.ChangeEvent<HTMLSelectElement>;
@@ -36,7 +35,7 @@ function App() {
     }
   };
 
-  // تبدیل آرایه cities به فرمت مورد نیاز react-select
+  
   const cityOptions = cities.map((item) => ({
     value: JSON.stringify(item), // همان مقدار قبلی که در value سلکت بود
     label: isPersian ? item.Iname : item.Ename,
