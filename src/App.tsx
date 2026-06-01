@@ -101,7 +101,7 @@ function App() {
         <Select
   options={cityOptions}
   onChange={handleSelectChange}
-  isSearchable
+  isSearchable ={true}
   isClearable
   placeholder={isPersian ? "جستجوی شهر..." : "Search city..."}
   noOptionsMessage={() => isPersian ? "شهری یافت نشد" : "No city found"}
