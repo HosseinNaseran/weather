@@ -37,7 +37,7 @@ function App() {
 
   
   const cityOptions = cities.map((item) => ({
-    value: JSON.stringify(item), // همان مقدار قبلی که در value سلکت بود
+    value: JSON.stringify(item), 
     label: isPersian ? item.Iname : item.Ename,
   }));
 
@@ -97,7 +97,7 @@ function App() {
             <button onClick={() => setIsPersian(true)}>فارسی</button>
           )}
 
-          {/* جایگزینی select معمولی با searchable select */}
+          
         <Select
   options={cityOptions}
   onChange={handleSelectChange}
