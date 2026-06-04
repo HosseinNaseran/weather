@@ -21,19 +21,21 @@ function App() {
       }
     );
   };
+  interface CityOption {
+  value: string;
+  label: string;
+}
 
-  const handleSelectChange = (selectedOption: any) => {
-    if (selectedOption) {
-      
-      const fakeEvent = {
-        target: { value: selectedOption.value },
-      } as React.ChangeEvent<HTMLSelectElement>;
-      handleChange(fakeEvent);
-    } else {
-      // اگر کاربر گزینه را پاک کرد
-      setWeatherData(undefined);
-    }
-  };
+const handleSelectChange = (selectedOption: CityOption | null) => {
+  if (selectedOption) {
+    const fakeEvent = {
+      target: { value: selectedOption.value },
+    } as React.ChangeEvent<HTMLSelectElement>;
+    handleChange(fakeEvent);
+  } else {
+    setWeatherData(undefined);
+  }
+};
 
   
   const cityOptions = cities.map((item) => ({
