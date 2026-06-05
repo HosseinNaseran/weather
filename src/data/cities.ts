@@ -1,4 +1,3 @@
-
 export const cities = [
   { id: 1, Ename: "Tehran", Iname: "تهران", lat: "35.7219", lon: "51.3347" },
   { id: 2, Ename: "Ahvaz", Iname: "اهواز", lat: "31.3183", lon: "48.6706" },
@@ -15,4 +14,9 @@ export const cities = [
   { id: 13, Ename: "Kermanshah", Iname: "کرمانشاه", lat: "34.3277", lon: "47.0778" },
   { id: 14, Ename: "Sari", Iname: "ساری", lat: "36.5633", lon: "53.0601" },
   { id: 15, Ename: "Bandar Abbas", Iname: "بندرعباس", lat: "27.1832", lon: "56.2666" },
+  { id: 16, Ename: "Kerman", Iname: "کرمان", lat: "30.2839", lon: "57.0838" },
+  { id: 17, Ename: "Hamedan", Iname: "همدان", lat: "34.7982", lon: "48.5146" },
+  { id: 18, Ename: "Arak", Iname: "اراک", lat: "34.0949", lon: "49.6981" },
+  { id: 19, Ename: "Qazvin", Iname: "قزوین", lat: "36.2688", lon: "50.0041" },
+  { id: 20, Ename: "Zahedan", Iname: "زاهدان", lat: "29.4963", lon: "60.8629" },
 ];
