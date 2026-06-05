@@ -105,6 +105,8 @@ const handleSelectChange = (selectedOption: CityOption | null) => {
   onChange={handleSelectChange}
   isSearchable ={true}
   isClearable
+  menuPlacement="top"
+  maxMenuHeight={150}
   placeholder={isPersian ? "جستجوی شهر..." : "Search city..."}
   noOptionsMessage={() => isPersian ? "شهری یافت نشد" : "No city found"}
   classNamePrefix="custom-select"   // کلید اصلی
