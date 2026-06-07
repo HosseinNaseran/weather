@@ -3,7 +3,8 @@ import "./App.css";
 import { getCurrentWeather } from "./services/api";
 import type { WeatherData } from "./types/server";
 import Select from "react-select";
-import { searchCity, GeocodingResult } from "./services/geocoding";
+import { searchCity } from "./services/geocoding";
+import type { GeocodingResult } from "./services/geocoding";
 
 interface CityOption {
   value: string;
@@ -17,9 +18,9 @@ function App() {
   const [searchResults, setSearchResults] = useState<CityOption[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedCity, setSelectedCity] = useState<CityOption | null>(null);
-  const [typingTimeout, setTypingTimeout] = useState<NodeJS.Timeout | null>(null);
+  const [typingTimeout, setTypingTimeout] = useState<number | null>(null); 
 
- 
+  // جستجو با دبه‌ونس
   const handleSearch = useCallback(async (value: string) => {
     if (!value || value.length < 2) {
       setSearchResults([]);
@@ -82,91 +83,89 @@ function App() {
     : undefined;
 
   return (
-  <div className="container">
-   
-    {weatherData && <span className="shape"></span>}
-    
-    <div className="weather-items-container">
-      {isPersian ? <h1>هواشناسی</h1> : <h1>weather app</h1>}
-
-      {isLoading && <div className="loading">{isPersian ? "در حال بارگذاری..." : "Loading..."}</div>}
-
+    <div className="container">
+      {weatherData && <span className="shape"></span>}
       
-      {weatherData && !isLoading && (
-        <>
-          <div className="weather-items">
-            <div className="weather-item">
-              {isPersian ? (
-                <div>
-                  <h2>فشار هوا :</h2>
-                  <span>{weatherData?.main?.pressure} hPa</span>
-                </div>
-              ) : (
-                <div>
-                  <h2>pressure :</h2>
-                  <span>{weatherData?.main?.pressure} hPa</span>
-                </div>
-              )}
-            </div>
-            <div className="weather-item">
-              {isPersian ? (
-                <div>
-                  <h2>دمای هوا :</h2>
-                  <span>{temp}°C</span>
-                </div>
-              ) : (
-                <div>
-                  <h2>temp :</h2>
-                  <span>{temp}°C</span>
-                </div>
-              )}
-            </div>
-            <div className="weather-item">
-              {isPersian ? (
-                <div>
-                  <h2>سرعت باد :</h2>
-                  <span>{weatherData?.wind?.speed} m/s</span>
-                </div>
-              ) : (
-                <div>
-                  <h2>wind speed :</h2>
-                  <span>{weatherData?.wind?.speed} m/s</span>
-                </div>
-              )}
-            </div>
-          </div>
-        </>
-      )}
+      <div className="weather-items-container">
+        {isPersian ? <h1>هواشناسی</h1> : <h1>weather app</h1>}
 
-      <div className="weather-buttons">
-        {isPersian ? (
-          <button onClick={() => setIsPersian(false)}>English</button>
-        ) : (
-          <button onClick={() => setIsPersian(true)}>فارسی</button>
+        {isLoading && <div className="loading">{isPersian ? "در حال بارگذاری..." : "Loading..."}</div>}
+
+        {weatherData && !isLoading && (
+          <>
+            <div className="weather-items">
+              <div className="weather-item">
+                {isPersian ? (
+                  <div>
+                    <h2>فشار هوا :</h2>
+                    <span>{weatherData?.main?.pressure} hPa</span>
+                  </div>
+                ) : (
+                  <div>
+                    <h2>pressure :</h2>
+                    <span>{weatherData?.main?.pressure} hPa</span>
+                  </div>
+                )}
+              </div>
+              <div className="weather-item">
+                {isPersian ? (
+                  <div>
+                    <h2>دمای هوا :</h2>
+                    <span>{temp}°C</span>
+                  </div>
+                ) : (
+                  <div>
+                    <h2>temp :</h2>
+                    <span>{temp}°C</span>
+                  </div>
+                )}
+              </div>
+              <div className="weather-item">
+                {isPersian ? (
+                  <div>
+                    <h2>سرعت باد :</h2>
+                    <span>{weatherData?.wind?.speed} m/s</span>
+                  </div>
+                ) : (
+                  <div>
+                    <h2>wind speed :</h2>
+                    <span>{weatherData?.wind?.speed} m/s</span>
+                  </div>
+                )}
+              </div>
+            </div>
+          </>
         )}
 
-        <Select
-          options={searchResults}
-          onInputChange={onInputChange}
-          onChange={handleCityChange}
-          value={selectedCity}
-          isLoading={isSearching}
-          isSearchable
-          isClearable
-          menuPlacement="top"
-          maxMenuHeight={150}
-          placeholder={isPersian ? "نام شهر را بنویسید..." : "Type city name..."}
-          noOptionsMessage={({ inputValue }) => 
-            !inputValue ? (isPersian ? "تایپ کنید..." : "Start typing...") :
-            isPersian ? "شهری یافت نشد" : "No city found"
-          }
-          classNamePrefix="custom-select"
-          className="city-select"
-        />
+        <div className="weather-buttons">
+          {isPersian ? (
+            <button onClick={() => setIsPersian(false)}>English</button>
+          ) : (
+            <button onClick={() => setIsPersian(true)}>فارسی</button>
+          )}
+
+          <Select
+            options={searchResults}
+            onInputChange={onInputChange}
+            onChange={handleCityChange}
+            value={selectedCity}
+            isLoading={isSearching}
+            isSearchable
+            isClearable
+            menuPlacement="top"
+            maxMenuHeight={150}
+            placeholder={isPersian ? "نام شهر را بنویسید..." : "Type city name..."}
+            noOptionsMessage={({ inputValue }) => 
+              !inputValue ? (isPersian ? "تایپ کنید..." : "Start typing...") :
+              isPersian ? "شهری یافت نشد" : "No city found"
+            }
+            classNamePrefix="custom-select"
+            className="city-select"
+          />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default App;
