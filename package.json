@@ -13,10 +13,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.3.2",
     "axios": "^1.13.5",
+    "node": "^26.5.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "react-select": "^5.10.2"
+    "react-select": "^5.10.2",
+    "tailwindcss": "^4.3.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
