@@ -255,7 +255,8 @@ function App() {
                     {temp || '--'}
                   </h1>
                   <p className="text-cyan-400 text-xl font-medium text-shadow-cyan-400 [text-shadow:0_0_20px]">
-                    {weatherData?.weather?.[0]?.description || "Loading..."}
+                    {weatherData?.weather?.[0]?.description}
+                    {isLoading && <div>Loading...</div>}
                   </p>
                 </div>
               </div>
