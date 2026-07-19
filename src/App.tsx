@@ -12,6 +12,7 @@ import windIcon from './Assets/images/wind.svg'
 import humidityIcon from './Assets/images/humidity.svg'
 import sunriseIcon from './Assets/images/sunrise.svg'
 import sunsetIcon from './Assets/images/sunset.svg'
+import { useLanguage } from "./languages/languagesContext";
 
 interface CityOption {
   value: string;
@@ -23,13 +24,15 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [selectedCity, setSelectedCity] = useState<CityOption | null>(null);
-  
+
   const [searchInput, setSearchInput] = useState('');
   const [suggestions, setSuggestions] = useState<CityOption[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [typingTimeout, setTypingTimeout] = useState<number | null>(null);
   const searchWrapperRef = useRef<HTMLDivElement>(null);
+
+  const { t, language, setLanguage } = useLanguage();
 
   const handleSearch = useCallback(async (value: string) => {
     if (!value || value.length < 2) {
@@ -46,7 +49,6 @@ function App() {
           lat: city.lat,
           lon: city.lon,
           name: city.name,
-          iname: city.local_names?.fa || city.name,
         }),
         label: city.name,
       }));
@@ -76,7 +78,7 @@ function App() {
     setShowSuggestions(false);
     setSuggestions([]);
     setSelectedIndex(-1);
-    
+
     const location = JSON.parse(selected.value);
     setIsLoading(true);
     setSelectedCity(selected);
@@ -89,7 +91,7 @@ function App() {
       setWeatherData(result);
     } catch (error) {
       console.error("Error fetching weather:", error);
-      alert("Error fetching weather");
+      alert(t('error'));
     } finally {
       setIsLoading(false);
     }
@@ -98,7 +100,7 @@ function App() {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'ArrowDown') {
       e.preventDefault();
-      setSelectedIndex(prev => 
+      setSelectedIndex(prev =>
         prev < suggestions.length - 1 ? prev + 1 : prev
       );
     } else if (e.key === 'ArrowUp') {
@@ -127,9 +129,9 @@ function App() {
   const highlightMatch = (text: string, query: string) => {
     if (!query || !text) return text;
     const parts = text.split(new RegExp(`(${query})`, 'gi'));
-    return parts.map((part, index) => 
-      part.toLowerCase() === query.toLowerCase() ? 
-        <strong key={index} style={{ color: '#38bdf8' }}>{part}</strong> : 
+    return parts.map((part, index) =>
+      part.toLowerCase() === query.toLowerCase() ?
+        <strong key={index} style={{ color: '#38bdf8' }}>{part}</strong> :
         part
     );
   };
@@ -137,78 +139,72 @@ function App() {
   const temp = weatherData?.main?.temp
     ? (weatherData.main.temp - 273.15).toFixed(1)
     : undefined;
-    
+
   const calculateAirQuality = () => {
-    if (!weatherData) return { value: 0, label: 'N/A', aqi: 0 };
-    
+    if (!weatherData) return { value: 0, label: 'N/A' };
 
     const pressure = weatherData.main?.pressure || 1013;
     const humidity = weatherData.main?.humidity || 50;
     const tempValue = parseFloat(temp || '20');
-    
 
-    let aqi = 0;
-    
-    
     const pressureFactor = Math.min(100, Math.abs(pressure - 1013) * 0.3);
-    
-    
-    const humidityFactor = humidity >= 40 && humidity <= 60 ? 0 : 
-                          Math.min(100, Math.abs(humidity - 50) * 1.5);
-    
-    
+    const humidityFactor = humidity >= 40 && humidity <= 60 ? 0 :
+      Math.min(100, Math.abs(humidity - 50) * 1.5);
     const tempFactor = tempValue >= 15 && tempValue <= 25 ? 0 :
-                       Math.min(100, Math.abs(tempValue - 20) * 4);
-    
-    
-    aqi = Math.round((pressureFactor + humidityFactor + tempFactor) / 3);
-    
+      Math.min(100, Math.abs(tempValue - 20) * 4);
 
+    let aqi = Math.round((pressureFactor + humidityFactor + tempFactor) / 3);
     aqi = Math.min(100, Math.max(0, aqi));
-    
-    
+
     let label;
     if (aqi <= 20) {
-      label = 'Excellent';
+      label = t("excellent");
     } else if (aqi <= 40) {
-      label = 'Good';
+      label = t("good");
     } else if (aqi <= 60) {
-      label = 'Moderate';
+      label = t("moderate");
     } else if (aqi <= 80) {
-      label = 'Poor';
+      label = t("poor");
     } else {
-      label = 'Hazardous';
+      label = t("hazardous");
     }
-    
+
     return { value: aqi, label };
   };
-  
+
   const airQuality = calculateAirQuality();
-  
+
+  // ==================== کمکی برای فرمت اعداد فارسی ====================
+  const formatNumber = (num: number | string) => {
+    if (language !== 'fa') return num;
+    // تبدیل اعداد انگلیسی به فارسی
+    const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
+    return String(num).replace(/\d/g, (digit) => persianDigits[parseInt(digit)]);
+  };
 
   return (
     <>
-      <div className="container max-w-5xl px-6 py-8 mx-auto">
-        <div className="absolute rounded-full blur-3xl opacity-20 w-[600px] h-[600px] max-w-full top-[-200px] left-[-100px] bg-[radial-gradient(circle,rgba(0,212,255,1),transparent_70%)]"></div>
-        <div className="absolute rounded-full blur-3xl opacity-20 w-[350px] h-[350px] max-w-full top-[40%] sm:left-[40%] left-[10%] bg-[radial-gradient(circle,rgb(153,0,255),transparent_50%)] "></div>
-        
+      <div className="container max-w-5xl px-6 py-8 mx-auto overflow-hidden">
+        <div className="absolute rounded-full blur-3xl opacity-20 w-150 h-150 max-w-full -top-50 -left-25 bg-[radial-gradient(circle,rgba(0,212,255,1),transparent_70%)]"></div>
+        <div className="absolute rounded-full blur-3xl opacity-20 w-87.5 h-87.5 max-w-full top-[90%] sm:top-[40%] sm:left-[40%] left-[10%] bg-[radial-gradient(circle,rgb(153,0,255),transparent_50%)]"></div>
+
         <header className="flex items-center w-full justify-between p-10 flex-col sm:flex-row gap-4">
           <h3 className="text-2xl font-semibold">
-            {selectedCity ? selectedCity.label : "City Name"}
+            {selectedCity ? selectedCity.label : t('cityName')}
           </h3>
-          
+
           <div className="relative flex-1 min-w-70 max-w-sm group" ref={searchWrapperRef}>
-            <div className="flex items-center gap-2 rounded-2xl px-4 py-3 bg-slate-900 backdrop-blur-xl border-gray-600 border-1">
+            <div className="flex items-center gap-2 rounded-2xl px-4 py-3 bg-slate-900 backdrop-blur-xl border-gray-600 border">
               {isSearching ? (
                 <div className="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
               ) : (
                 <img src={searchIcon} alt="search" className="w-5 h-5" />
               )}
-              
-              <input 
+
+              <input
                 className="outline-none flex-1 bg-transparent text-sm font-medium tracking-wide"
-                type="search" 
-                placeholder="Search for a city..."
+                type="search"
+                placeholder={t('searchPlaceholder')}
                 value={searchInput}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
@@ -231,11 +227,10 @@ function App() {
                     key={index}
                     onClick={() => handleSelectSuggestion(city)}
                     onMouseEnter={() => setSelectedIndex(index)}
-                    className={`px-4 py-3 cursor-pointer transition-all duration-150 text-sm font-medium ${
-                      index === selectedIndex 
-                        ? 'bg-cyan-500/20 text-cyan-400' 
+                    className={`px-4 py-3 cursor-pointer transition-all duration-150 text-sm font-medium ${index === selectedIndex
+                        ? 'bg-cyan-500/20 text-cyan-400'
                         : 'hover:bg-slate-800/50 text-gray-300'
-                    } ${index < suggestions.length - 1 ? 'border-b border-gray-800' : ''}`}
+                      } ${index < suggestions.length - 1 ? 'border-b border-gray-800' : ''}`}
                   >
                     {highlightMatch(city.label, searchInput)}
                   </li>
@@ -243,6 +238,9 @@ function App() {
               </ul>
             )}
           </div>
+          <button className="bg-slate-600 px-4 py-2 rounded-2xl cursor-pointer active:bg-slate-800" onClick={() => setLanguage(language === 'en' ? 'fa' : 'en')}>
+            {language === 'en' ? 'فارسی' : 'English'}
+          </button>
         </header>
 
         <main>
@@ -252,45 +250,62 @@ function App() {
               <div className="flex gap-10">
                 <div>
                   <h1 className="font-bold text-8xl bg-gradient-to-b from-white to-indigo-300 bg-clip-text text-transparent">
-                    {temp || '--'}
+                    {temp ? formatNumber(temp) : '--'}
                   </h1>
                   <p className="text-cyan-400 text-xl font-medium text-shadow-cyan-400 [text-shadow:0_0_20px]">
-                    {weatherData?.weather?.[0]?.description}
-                    {isLoading && <div>Loading...</div>}
+                    {isLoading ? (
+                      t('loading')
+                    ) : (
+                      weatherData?.weather?.[0]?.description 
+                        ? (language === 'fa' 
+                            ? t(weatherData.weather[0].description) || weatherData.weather[0].description
+                            : weatherData.weather[0].description)
+                        : '--'
+                    )}
                   </p>
                 </div>
               </div>
               <div>
                 <ul className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  <Item 
-                    label="TEMP"
-                    image={tempIcon} 
-                    value={temp ? `${temp}°` : '--'} 
+                  <Item
+                    label={t("temp")}
+                    image={tempIcon}
+                    value={temp ? `${formatNumber(temp)}°` : '--'}
                   />
-                  <Item 
-                    label="HUMIDITY"
-                    image={humidityIcon} 
-                    value={weatherData?.main?.humidity ? `${weatherData.main.humidity}%` : '--'} 
+                  <Item
+                    label={t("humidity")}
+                    image={humidityIcon}
+                    value={weatherData?.main?.humidity ? `${formatNumber(weatherData.main.humidity)}%` : '--'}
                   />
-                  <Item 
-                    label="WIND"
-                    image={windIcon} 
-                    value={weatherData?.wind?.speed ? `${weatherData.wind.speed} m/s` : '--'} 
+                  <Item
+                    label={t("wind")}
+                    image={windIcon}
+                    value={weatherData?.wind?.speed ? `${formatNumber(weatherData.wind.speed)} m/s` : '--'}
                   />
-                  <Item 
-                    label="PRESSURE"
-                    image={presureIcon} 
-                    value={weatherData?.main?.pressure ? `${weatherData.main.pressure} hPa` : '--'} 
+                  <Item
+                    label={t("pressure")}
+                    image={presureIcon}
+                    value={weatherData?.main?.pressure ? `${formatNumber(weatherData.main.pressure)} hPa` : '--'}
                   />
-                  <Item 
-                    label="SUNRISE"
-                    image={sunriseIcon} 
-                    value={weatherData?.sys?.sunrise ? new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}) : '--'} 
+                  <Item
+                    label={t("sunrise")}
+                    image={sunriseIcon}
+                    value={weatherData?.sys?.sunrise ? 
+                      new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString(
+                        language === 'fa' ? 'fa-IR' : 'en-US', 
+                        { hour: '2-digit', minute: '2-digit' }
+                      ) : '--'
+                    }
                   />
-                  <Item 
-                    label="SUNSET"
-                    image={sunsetIcon} 
-                    value={weatherData?.sys?.sunset ? new Date(weatherData.sys.sunset * 1000).toLocaleTimeString('en-US', {hour: '2-digit', minute: '2-digit'}) : '--'} 
+                  <Item
+                    label={t("sunset")}
+                    image={sunsetIcon}
+                    value={weatherData?.sys?.sunset ? 
+                      new Date(weatherData.sys.sunset * 1000).toLocaleTimeString(
+                        language === 'fa' ? 'fa-IR' : 'en-US', 
+                        { hour: '2-digit', minute: '2-digit' }
+                      ) : '--'
+                    }
                   />
                 </ul>
               </div>
@@ -300,33 +315,30 @@ function App() {
           <div id="mainBottom" className="grid grid-cols-1 gap-6 mt-6">
             <div id="mainBottomLeft" className="rounded-3xl p-8 backdrop:blur-md bg-slate-900 border-1 border-gray-800">
               <p className="text-xs font-semibold mb-6">
-                Air Quality
+                {t("airQuality")}
               </p>
               <div className="flex items-end gap-4 mb-5">
-                
                 <span className="text-6xl font-bold leading-none tracking-tighter text-emerald-400 [text-shadow:0_0px_20px_rgba(52,211,153,0.3)]">
-                  {airQuality.value}
+                  {formatNumber(airQuality.value)}
                 </span>
                 <span className="text-xl font-medium mb-1.5 text-emerald-400">
                   {airQuality.label}
                 </span>
-
               </div>
 
               <div className="relative h-2.5 rounded-full bg-slate-700 overflow-hidden mb-3">
-                <div 
+                <div
                   className="absolute h-full rounded-full bg-[linear-gradient(90deg,rgb(52,211,153),rgb(251,191,36))] transition-all duration-700 ease-out"
-                  style={{ 
-                    width: `${airQuality.value}%` 
+                  style={{
+                    width: `${airQuality.value}%`
                   }}
                 ></div>
               </div>
-              
-              
+
               <div className="flex justify-between text-xs font-medium text-slate-500">
-                <span>0 Excellent</span>
-                <span>50 Moderate</span>
-                <span>100 Hazardous</span>
+                <span>0 {t("excellent")}</span>
+                <span>50 {t("moderate")}</span>
+                <span>100 {t("hazardous")}</span>
               </div>
             </div>
           </div>
@@ -334,9 +346,9 @@ function App() {
 
         <footer className="mt-8 text-center">
           <p className="text-slate-500 text-sm">
-            Wanna see more?
+            {t("footer")}
             <a className="text-emerald-400 [text-shadow:0_0_20px] hover:text-emerald-300 transition-colors ml-1" href="https://hosseinnaseran.github.io/Hossein">
-              JoinUs
+              {t("joinUs")}
             </a>
           </p>
         </footer>
