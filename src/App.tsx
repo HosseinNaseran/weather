@@ -189,15 +189,15 @@ function App() {
   return (
     <>
       <div className="container max-w-5xl px-6 py-8 mx-auto">
-        <div className="absolute rounded-full blur-3xl opacity-20 w-[600px] h-[600px] top-[-200px] left-[-100px] bg-[radial-gradient(circle,rgba(0,212,255,1),transparent_70%)]"></div>
-        <div className="absolute rounded-full blur-3xl opacity-20 w-[350px] h-[350px] top-[40%] left-[40%] bg-[radial-gradient(circle,rgb(153,0,255),transparent_50%)] "></div>
+        <div className="absolute rounded-full blur-3xl opacity-20 w-[600px] h-[600px] max-w-full top-[-200px] left-[-100px] bg-[radial-gradient(circle,rgba(0,212,255,1),transparent_70%)]"></div>
+        <div className="absolute rounded-full blur-3xl opacity-20 w-[350px] h-[350px] max-w-full top-[40%] sm:left-[40%] left-[10%] bg-[radial-gradient(circle,rgb(153,0,255),transparent_50%)] "></div>
         
-        <header className="flex items-center w-full justify-between p-10">
+        <header className="flex items-center w-full justify-between p-10 flex-col sm:flex-row gap-4">
           <h3 className="text-2xl font-semibold">
             {selectedCity ? selectedCity.label : "City Name"}
           </h3>
           
-          <div className="relative flex-1 min-w-55 max-w-sm group" ref={searchWrapperRef}>
+          <div className="relative flex-1 min-w-70 max-w-sm group" ref={searchWrapperRef}>
             <div className="flex items-center gap-2 rounded-2xl px-4 py-3 bg-slate-900 backdrop-blur-xl border-gray-600 border-1">
               {isSearching ? (
                 <div className="w-5 h-5 border-2 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
