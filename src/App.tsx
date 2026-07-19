@@ -228,8 +228,8 @@ function App() {
                     onClick={() => handleSelectSuggestion(city)}
                     onMouseEnter={() => setSelectedIndex(index)}
                     className={`px-4 py-3 cursor-pointer transition-all duration-150 text-sm font-medium ${index === selectedIndex
-                        ? 'bg-cyan-500/20 text-cyan-400'
-                        : 'hover:bg-slate-800/50 text-gray-300'
+                      ? 'bg-cyan-500/20 text-cyan-400'
+                      : 'hover:bg-slate-800/50 text-gray-300'
                       } ${index < suggestions.length - 1 ? 'border-b border-gray-800' : ''}`}
                   >
                     {highlightMatch(city.label, searchInput)}
@@ -244,22 +244,22 @@ function App() {
         </header>
 
         <main>
-          <div id="mainTop" className="bg-[linear-gradient(135deg,rgba(0,212,255,0.08),rgba(124,58,237,0.05))] rounded-3xl p-8 mb-6 relative overflow-hidden shadow-2xl transition-all border-1 border-sky-950">
+          <div id="mainTop" className="bg-[linear-gradient(135deg,rgba(0,212,255,0.08),rgba(124,58,237,0.05))] rounded-3xl p-8 mb-6 relative overflow-hidden shadow-2xl transition-all border border-sky-950">
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_0%_0%,rgba(0,212,255,0.1),transparent_50%)]"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
               <div className="flex gap-10">
                 <div>
-                  <h1 className="font-bold text-8xl bg-gradient-to-b from-white to-indigo-300 bg-clip-text text-transparent">
+                  <h1 className="font-bold text-8xl bg-linear-to-b from-white to-indigo-300 bg-clip-text text-transparent">
                     {temp ? formatNumber(temp) : '--'}
                   </h1>
                   <p className="text-cyan-400 text-xl font-medium text-shadow-cyan-400 [text-shadow:0_0_20px]">
                     {isLoading ? (
                       t('loading')
                     ) : (
-                      weatherData?.weather?.[0]?.description 
-                        ? (language === 'fa' 
-                            ? t(weatherData.weather[0].description) || weatherData.weather[0].description
-                            : weatherData.weather[0].description)
+                      weatherData?.weather?.[0]?.description
+                        ? (language === 'fa'
+                          ? t(weatherData.weather[0].description) || weatherData.weather[0].description
+                          : weatherData.weather[0].description)
                         : '--'
                     )}
                   </p>
@@ -290,9 +290,9 @@ function App() {
                   <Item
                     label={t("sunrise")}
                     image={sunriseIcon}
-                    value={weatherData?.sys?.sunrise ? 
+                    value={weatherData?.sys?.sunrise ?
                       new Date(weatherData.sys.sunrise * 1000).toLocaleTimeString(
-                        language === 'fa' ? 'fa-IR' : 'en-US', 
+                        language === 'fa' ? 'fa-IR' : 'en-US',
                         { hour: '2-digit', minute: '2-digit' }
                       ) : '--'
                     }
@@ -300,9 +300,9 @@ function App() {
                   <Item
                     label={t("sunset")}
                     image={sunsetIcon}
-                    value={weatherData?.sys?.sunset ? 
+                    value={weatherData?.sys?.sunset ?
                       new Date(weatherData.sys.sunset * 1000).toLocaleTimeString(
-                        language === 'fa' ? 'fa-IR' : 'en-US', 
+                        language === 'fa' ? 'fa-IR' : 'en-US',
                         { hour: '2-digit', minute: '2-digit' }
                       ) : '--'
                     }

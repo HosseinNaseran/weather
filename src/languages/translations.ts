@@ -21,8 +21,33 @@ export const Translations = {
     noCity: "No city found",
     startTyping: "Start typing...",
     footer: "Wanna see more?",
-    joinUs: "JoinUs"
-
+    joinUs: "JoinUs",
+    
+    // ↓↓↓ اینا رو اضافه کن ↓↓↓
+    "clear sky": "clear sky",
+    "few clouds": "few clouds",
+    "scattered clouds": "scattered clouds",
+    "broken clouds": "broken clouds",
+    "shower rain": "shower rain",
+    "rain": "rain",
+    "thunderstorm": "thunderstorm",
+    "snow": "snow",
+    "mist": "mist",
+    "overcast clouds": "overcast clouds",
+    "light rain": "light rain",
+    "moderate rain": "moderate rain",
+    "heavy rain": "heavy rain",
+    "light snow": "light snow",
+    "heavy snow": "heavy snow",
+    "fog": "fog",
+    "haze": "haze",
+    "smoke": "smoke",
+    "dust": "dust",
+    "sand": "sand",
+    "squall": "squall",
+    "tornado": "tornado",
+    "clouds": "clouds",
+    "drizzle": "drizzle"
   },
   fa: {
     appTitle: "هواشناسی",
@@ -47,8 +72,8 @@ export const Translations = {
     startTyping: "تایپ کنید...",
     footer: "بیشتر میخوای ؟",
     joinUs: "بیااینجا",
-
     
+    // توضیحات آب و هوا به فارسی
     "clear sky": "آسمان صاف",
     "few clouds": "کمی ابری",
     "scattered clouds": "ابری پراکنده",
@@ -59,6 +84,19 @@ export const Translations = {
     "snow": "برفی",
     "mist": "مه‌آلود",
     "overcast clouds": "ابرهای متراکم",
+    "light rain": "باران ملایم",
+    "moderate rain": "باران متوسط",
+    "heavy rain": "باران شدید",
+    "light snow": "برف ملایم",
+    "heavy snow": "برف سنگین",
+    "fog": "مه",
+    "haze": "غبار",
+    "smoke": "دود",
+    "dust": "گرد و غبار",
+    "sand": "شن و ماسه",
+    "squall": "طوفان ناگهانی",
+    "tornado": "گردباد",
+    "clouds": "ابری",
+    "drizzle": "نم نم باران"
   }
 };
-

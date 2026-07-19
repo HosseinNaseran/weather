@@ -1,16 +1,16 @@
 // src/contexts/LanguageContext.tsx
-
-import React, { createContext, useState, useEffect, ReactNode } from 'react';
-import {Translations} from './translations';
+import { createContext, useState, useEffect, useContext } from 'react';
+import type { ReactNode } from 'react';
+import { Translations } from './translations';
 
 // 1. نوع زبانی که داریم
 type Language = 'en' | 'fa';
 
-// 2. نوع Context که قراره توی کل برنامه استفاده بشه
+// 2. نوع Context - تابع t الان هر string ای رو قبول میکنه
 type LanguageContextType = {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: keyof typeof Translations.en) => string;
+  t: (key: string) => string; // ← اینجا تغییر کرد
 };
 
 // 3. خود Context رو می‌سازیم
@@ -29,9 +29,10 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem('language', language);
   }, [language]);
 
-  // تابع ترجمه: کلید رو می‌گیره و متن رو برمی‌گردونه
-  const t = (key: keyof typeof Translations.en) => {
-    return Translations[language][key] || key;
+  // تابع ترجمه: هر کلید رو قبول میکنه
+  // اگه کلید توی دیکشنری نباشه، خود کلید رو برمیگردونه
+  const t = (key: string): string => {
+    return Translations[language][key as keyof typeof Translations.en] || key;
   };
 
   return (
@@ -43,7 +44,7 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
 
 // 5. هوک سفارشی برای راحت‌تر استفاده کردن
 export const useLanguage = () => {
-  const context = React.useContext(LanguageContext);
+  const context = useContext(LanguageContext);
   if (!context) {
     throw new Error('useLanguage must be used within a LanguageProvider');
   }
