@@ -7,7 +7,7 @@ import rain from '../Assets/icons/rain.png';
 import storm from '../Assets/icons/cloud_lightning.png';
 import snow from '../Assets/icons/snow.png';
 import fog from '../Assets/icons/fog.png';
-import showerRain from "../Assets/icon/heavy_rain.png"
+import showerRain from "../Assets/icons/heavy_rain.png";
 
 
 
