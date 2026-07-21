@@ -1,7 +1,7 @@
 import clearDay from '../Assets/icons/clear-day.png';
 import clearNight from '../Assets/icons/clear night.png';
-import partlyCloudyDay from '../assets/icons/partly_cloudy_day.png';
-import partlyCloudyNight from '../assets/icons/partly_cloudy_night.png';
+import partlyCloudyDay from '../Assets/icons/partly_cloudy_day.png';
+import partlyCloudyNight from '../Assets/icons/partly_cloudy_night.png';
 import cloudy from '../Assets/icons/cloudy.png';
 import rain from '../Assets/icons/rain.png';
 import storm from '../Assets/icons/cloud_lightning.png';
