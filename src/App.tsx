@@ -249,12 +249,12 @@ function App() {
             <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_0%_0%,rgba(0,212,255,0.1),transparent_50%)]"></div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
               <div className="flex gap-10">
-                <div>
+                <div className="flex items-center">
                     {weatherData?.weather?.[0]?.icon && (
                     <img
                       src={getWeatherIcon(weatherData.weather[0].icon)}
                       alt={weatherData.weather[0].description}
-                      className="w-24 h-24"
+                      className="w-20 sm:w-24 sm:h-24"
                     />
                   )}
                 </div>
@@ -262,7 +262,7 @@ function App() {
 
                 
                
-                  <h1 className="font-bold text-8xl bg-linear-to-b from-white to-indigo-300 bg-clip-text text-transparent">
+                  <h1 className="font-bold text-7xl sm:text-8xl bg-linear-to-b from-white to-indigo-300 bg-clip-text text-transparent">
                     {temp ? formatNumber(temp) : '--'}
                   </h1>
                   <p className="text-cyan-400 text-xl font-medium text-shadow-cyan-400 [text-shadow:0_0_20px]">
