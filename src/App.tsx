@@ -13,6 +13,8 @@ import humidityIcon from './Assets/images/humidity.svg'
 import sunriseIcon from './Assets/images/sunrise.svg'
 import sunsetIcon from './Assets/images/sunset.svg'
 import { useLanguage } from "./languages/languagesContext";
+import { getWeatherIcon } from './components/weatherIcon';
+
 
 interface CityOption {
   value: string;
@@ -33,6 +35,7 @@ function App() {
   const searchWrapperRef = useRef<HTMLDivElement>(null);
 
   const { t, language, setLanguage } = useLanguage();
+
 
   const handleSearch = useCallback(async (value: string) => {
     if (!value || value.length < 2) {
@@ -174,10 +177,8 @@ function App() {
 
   const airQuality = calculateAirQuality();
 
-  // ==================== کمکی برای فرمت اعداد فارسی ====================
   const formatNumber = (num: number | string) => {
     if (language !== 'fa') return num;
-    // تبدیل اعداد انگلیسی به فارسی
     const persianDigits = '۰۱۲۳۴۵۶۷۸۹';
     return String(num).replace(/\d/g, (digit) => persianDigits[parseInt(digit)]);
   };
@@ -249,6 +250,18 @@ function App() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center relative z-10">
               <div className="flex gap-10">
                 <div>
+                    {weatherData?.weather?.[0]?.icon && (
+                    <img
+                      src={getWeatherIcon(weatherData.weather[0].icon)}
+                      alt={weatherData.weather[0].description}
+                      className="w-24 h-24"
+                    />
+                  )}
+                </div>
+                <div>
+
+                
+               
                   <h1 className="font-bold text-8xl bg-linear-to-b from-white to-indigo-300 bg-clip-text text-transparent">
                     {temp ? formatNumber(temp) : '--'}
                   </h1>
