@@ -239,7 +239,7 @@ function App() {
               </ul>
             )}
           </div>
-          <button className="bg-slate-600 px-4 py-2 rounded-2xl cursor-pointer active:bg-slate-800" onClick={() => setLanguage(language === 'en' ? 'fa' : 'en')}>
+          <button className="bg-slate-600 px-4 py-2 rounded-2xl cursor-pointer active:bg-slate-800 z-20" onClick={() => setLanguage(language === 'en' ? 'fa' : 'en')}>
             {language === 'en' ? 'فارسی' : 'English'}
           </button>
         </header>
