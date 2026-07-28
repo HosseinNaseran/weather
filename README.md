@@ -3,15 +3,15 @@
 
 A responsive weather application built with React and TypeScript using real-time weather data.
 
-# Live Demo
+## Live Demo
 
 https://hosseinnaseran.github.io/weather
 
-# Preview
+## Preview
 
 
 
-# Features
+## Features
 
 - Search weather by city
 - Real-time weather data
@@ -20,12 +20,12 @@ https://hosseinnaseran.github.io/weather
 - Wind speed
 - Responsive layout
 
-# Tech Stack
+## Tech Stack
 
 ## API
 
 This project uses the Open-Meteo API to fetch real-time weather information.
 
-# Getting Started
+## Getting Started
 
-# Author
+## Author
