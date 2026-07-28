@@ -1,32 +1,33 @@
 # Weather App
 
+A responsive weather application built with React and TypeScript that displays real-time weather information using the OpenWeather API.
 
-A responsive weather application built with React and TypeScript using real-time weather data.
-
-## Live Demo
-
-**[View Website](https://hosseinnaseran.github.io/weather)**
-
+**Live Demo:** [View Website](https://hosseinnaseran.github.io/weather)
 ## Preview
 
+### Desktop
+
+![Desktop Preview](./Assets/images/screenshot-pc.png)
+
+### Mobile
+
+![Mobile Preview](./Assets/images/screenshot-mobile.png)
 
 
 ## Features
 
 - Search weather by city
-- Real-time weather data
-- Temperature
-- Humidity
-- Wind speed
-- Responsive layout
-
+- Display real-time weather information
+- Temperature, humidity, and wind speed
+- Responsive design for all devices
+- Error handling for invalid city names
+  
 ## Tech Stack
 
 - React
 - TypeScript
 - CSS3
 - Vite
-- OpenWeather API
 
 ## API
 
@@ -50,3 +51,8 @@ npm run dev
 
 - [GitHub](https://github.com/HosseinNaseran)
 - [LinkedIn](https://www.linkedin.com/in/hosseinnaseran)
+
+
+---
+
+⭐ If you found this project useful, consider giving it a star on GitHub.
