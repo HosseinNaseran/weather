@@ -5,7 +5,7 @@ A responsive weather application built with React and TypeScript using real-time
 
 ## Live Demo
 
-https://hosseinnaseran.github.io/weather
+**[View Website](https://hosseinnaseran.github.io/weather)**
 
 ## Preview
 
@@ -30,8 +30,23 @@ https://hosseinnaseran.github.io/weather
 
 ## API
 
-This project uses the Open-Meteo API to fetch real-time weather information.
+This project uses the OpenWeather API to fetch real-time weather information.
 
 ## Getting Started
 
+```bash
+git clone https://github.com/HosseinNaseran/weather.git
+
+cd weather
+
+npm install
+
+npm run dev
+```
+
 ## Author
+
+**Hossein Naseran**
+
+- [GitHub](https://github.com/HosseinNaseran)
+- [LinkedIn](https://www.linkedin.com/in/hosseinnaseran)
