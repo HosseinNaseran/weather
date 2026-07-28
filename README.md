@@ -1,6 +1,5 @@
 # Weather App
 
-# Description
 
 A responsive weather application built with React and TypeScript using real-time weather data.
 
