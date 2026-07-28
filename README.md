@@ -22,6 +22,12 @@ https://hosseinnaseran.github.io/weather
 
 ## Tech Stack
 
+- React
+- TypeScript
+- CSS3
+- Vite
+- OpenWeather API
+
 ## API
 
 This project uses the Open-Meteo API to fetch real-time weather information.
